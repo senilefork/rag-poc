@@ -1,0 +1,26 @@
+# Base LlamaIndex framework
+llama-index-core==0.12.10
+
+# Local vector storage
+chromadb==0.6.3
+llama-index-vector-stores-chroma==0.4.1
+
+# Free, open-source local embeddings
+llama-index-embeddings-huggingface==0.5.0
+
+# LLM inference runs in a separate llama.cpp container
+# (ghcr.io/ggml-org/llama.cpp:server); the app talks to it over HTTP,
+# so an in-process llama.cpp package is not needed here.
+# llama-index-llms-llama-cpp==0.4.0
+
+# Performance acceleration for open-source models
+sentence-transformers==3.4.1
+torch==2.6.0
+
+# Docling for advanced image recognition
+docling==2.130.0
+# PDF backend used by markdown_nodes (pulled in by docling, pinned explicitly)
+pypdfium2==5.13.0
+
+# Tests
+pytest==8.4.2
