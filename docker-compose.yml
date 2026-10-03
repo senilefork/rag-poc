@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    volumes:
+      - ./local_chroma_db:/app/local_chroma_db
+      - deps_cache:/opt/deps
+      - ./:/app
+    environment:
+      - LLM_BASE_URL=http://llm:8080/v1
+    depends_on:
+      - llm
+
+  llm:
+    build:
+      context: .
+      dockerfile: Dockerfile.llm
+    command:
+      - "-m"
+      - "/models/qwen2.5-1.5b-instruct-q4_k_m.gguf"
+      - "--host"
+      - "0.0.0.0"
+      - "--port"
+      - "8080"
+    ports:
+      - "8080:8080"
+
+# Holds the pip cache and the requirements.txt hash that gates the startup
+# dependency install. Kept out of the image so it survives `docker compose run`.
+volumes:
+  deps_cache:
